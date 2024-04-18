@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-function FeaturedProfileHomeCard({ contributions }) {
+function FeaturedProfileHomeCard({ contributions }: any) {
   if (!contributions || contributions.length === 0) return null; // Check for undefined or empty contributions
 
-  const { name, bio, img, nationality, achievements } = contributions[0];
+  const { name, bio, img, nationality, achievements, field } = contributions[0];
   return (
     <div className="container mx-auto px-4 py-8 min-h-screen flex items-center justify-center">
       <div className="flex flex-col md:flex-row items-center gap-8">
@@ -13,7 +13,7 @@ function FeaturedProfileHomeCard({ contributions }) {
             {name}
           </h3>
           {/* <p className="text-md text-gray-500 mt-2">{field}</p> */}
-          <p className="text-md text-gray-500 mt-2">{nationality}</p>
+          <p className="text-md text-gray-500 mt-2">{field}</p>
           <p className="mt-4 text-gray-700"> {bio}</p>
         </div>
         <div className="md:flex-1">{img && <img src={img} alt={name} />}</div>

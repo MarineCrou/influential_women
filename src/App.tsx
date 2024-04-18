@@ -4,6 +4,7 @@ import React from "react";
 import Home from "./components/Home";
 import Signup from "./components/signup";
 import Navbar from "./components/Navbar";
+import AboutUs from "./components/AboutUs";
 
 function App() {
   <p>hello !</p>;
@@ -12,6 +13,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/aboutus" element={<AboutUs />} />
         {/* Routes : 
       - HOME PAGE => 
             => Features hero baner (women + h1)
