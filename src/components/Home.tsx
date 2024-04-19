@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Navbar from "./Navbar";
 import FeaturedProfileHomeCard from "./FeaturedProfileHomeCard";
 import ProfileListHomeCard from "./ProfileListHomeCard";
@@ -50,7 +51,7 @@ function Home() {
           muted
           playsInline
           className="absolute z-0 w-full h-full object-cover" // Use 'object-cover' to ensure full coverage
-          src="https://www.youtube.com/watch?v=gemWr-cn9GU"
+          src="./media/baner-video-women.mp4"
           id="baner video"
         >
           Your browser does not support the video tag.

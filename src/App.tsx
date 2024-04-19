@@ -1,15 +1,31 @@
 import "./styles/index.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Home from "./components/Home";
 import Signup from "./components/signup";
 import Navbar from "./components/Navbar";
 import AboutUs from "./components/AboutUs";
-// import Login from "./components/login";
+import Login from "./components/login";
 import SingleProfilePage from "./components/SingleProfilePage";
+import axios from "axios";
 // import CreateNewProfile from "./components/CreateProfilePage";
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  async function fetchUser() {
+    const token = localStorage.getItem("token");
+    const resp = await axios.get("/api/user", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    setUser(resp.data);
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) fetchUser();
+  }, []);
+
   return (
     <Router>
       <Navbar />
@@ -29,7 +45,8 @@ function App() {
       - Backend Admin where all pending contributions are waiting to be reviewed*/}
         {/* <Route path="/login" element={Login} /> */}
         <Route path="/signup" element={<Signup />} /> {/* - Sign up page  */}
-        {/* <Route path="/login" element={<Login />} /> Login Page */}
+        <Route path="/login" element={<Login fetchUser={fetchUser} />} />
+        Page
       </Routes>
     </Router>
   );
