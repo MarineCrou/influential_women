@@ -1,37 +1,67 @@
-import React, { useState } from "react";
-import Navbar from "./Navbar";
+import { SyntheticEvent, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { baseUrl } from "../config";
+
+interface ErrorData {
+  name?: string;
+  email?: string;
+  password?: string;
+  passwordConfirmation?: string;
+}
 
 const Signup = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Implement your signup logic here
-    console.log(
-      "Name:",
-      name,
-      "Email:",
-      email,
-      "Password:",
-      password,
-      "Confirm Password:",
-      confirmPassword
-    );
-  };
+  //we have to set state for the user. here we can set the state for all 4 inputs. the state should start with an empty string.
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    passwordConfirmation: "",
+  });
+
+  const [errorData, setErrorData] = useState<ErrorData>({
+    name: "",
+    email: "",
+    password: "",
+    passwordConfirmation: "",
+  });
+
+  function handleChange(e: any) {
+    const fieldName = e.target.name;
+    const newFormData = structuredClone(formData);
+    newFormData[fieldName as keyof typeof formData] = e.target.value;
+    setFormData(newFormData);
+  }
+
+  async function handleSubmit(e: SyntheticEvent) {
+    // ! Adding a try/catch
+    try {
+      e.preventDefault();
+      const resp = await axios.post(`${baseUrl}/signup`, formData);
+      console.log(resp.data);
+      // ! take them to the login page
+      navigate("/login");
+    } catch (e: any) {
+      // ! Set errors in the catch
+      setErrorData(e.response.data.errors);
+    }
+  }
+
+  console.log(formData);
+  console.log(formData.name);
+  console.log("errors:", errorData?.name);
 
   return (
     <>
-      {/* <Navbar /> */}
       <div className="flex min-h-screen bg-gray-100">
         {/* Image container */}
-        <div className="relative w-full lg:w-1/2 min-h-screen">
+        <div className="hidden lg:block w-1/2">
           <img
             src="../media/unsung-woman-logo-2.webp"
             alt="Sign Up"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
 
@@ -43,71 +73,94 @@ const Signup = () => {
               <div>
                 <label
                   htmlFor="name"
-                  className="text-sm font-medium text-gray-700"
+                  className="text-medium font-bold text-gray-700"
                 >
                   Name
                 </label>
                 <input
                   type="text"
-                  id="name"
-                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  name="name"
+                  id="userName"
+                  placeholder="Enter your Name"
+                  className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                  value={formData.name}
+                  onChange={handleChange}
                   required
                 />
+                {errorData.name && (
+                  <p className="text-red-500 text-xs mt-1">{errorData.name}</p>
+                )}
               </div>
               <div>
                 <label
                   htmlFor="email"
-                  className="text-sm font-medium text-gray-700"
+                  className="text-medium font-bold text-gray-700"
                 >
                   Email
                 </label>
                 <input
                   type="email"
+                  name="email"
                   id="email"
-                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your Email"
+                  className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                  value={formData.email}
+                  onChange={handleChange}
                   required
                 />
+                {errorData.email && (
+                  <p className="text-red-500 text-xs mt-1">{errorData.email}</p>
+                )}
               </div>
               <div>
                 <label
                   htmlFor="password"
-                  className="text-sm font-medium text-gray-700"
+                  className="text-medium font-bold text-gray-700 "
                 >
                   Password
                 </label>
                 <input
                   type="password"
+                  name="password"
                   id="password"
-                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your Password"
+                  className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                  value={formData.password}
+                  onChange={handleChange}
                   required
                 />
+                {errorData.password && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errorData.password}
+                  </p>
+                )}
               </div>
               <div>
                 <label
-                  htmlFor="confirm-password"
-                  className="text-sm font-medium text-gray-700"
+                  htmlFor="passwordConfirmation"
+                  className="text-medium font-bold text-gray-700"
                 >
                   Confirm Password
                 </label>
                 <input
                   type="password"
-                  id="confirm-password"
-                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  name="passwordConfirmation"
+                  id="passwordConfirmation"
+                  placeholder="Enter your Password Confirmation"
+                  className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                  value={formData.passwordConfirmation}
+                  onChange={handleChange}
                   required
                 />
+                {errorData.passwordConfirmation && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errorData.passwordConfirmation}
+                  </p>
+                )}
               </div>
               <button
                 type="submit"
                 className="w-full bg-indigo-600 text-white rounded-md py-2 px-4 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
-                oncl
               >
                 Sign Up
               </button>

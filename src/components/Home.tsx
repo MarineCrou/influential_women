@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import FeaturedProfileHomeCard from "./FeaturedProfileHomeCard";
 import ProfileListHomeCard from "./ProfileListHomeCard";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../config";
 
 function Home() {
   const [woman, getWoman] = useState(null);
@@ -11,7 +12,7 @@ function Home() {
 
   React.useEffect(() => {
     async function fetchWoman() {
-      const resp = await fetch(`/api/women/featuredProfile`);
+      const resp = await fetch(`${baseUrl}/women/featuredProfile`);
       const dataFetched = await resp.json();
       getWoman(dataFetched);
     }
@@ -22,7 +23,7 @@ function Home() {
   useEffect(() => {
     async function fetchWomen() {
       try {
-        const response = await fetch(`/api/women`);
+        const response = await fetch(`${baseUrl}/women`);
         const data = await response.json();
         setWomenList(data);
       } catch (error) {
