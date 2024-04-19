@@ -36,9 +36,13 @@ function App() {
         <Route path="/" element={<Home />} />
         {/*  HOME PAGE => Features hero baner (women + h1) + Feature woman of the month + list of all women */}
         <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="/profile/:id" element={<SingleProfilePage />} />{" "}
+        <Route
+          path="/profile/:id"
+          element={<SingleProfilePage user={user} setUser={setUser} />}
+        />{" "}
         {/* detailed profile page*/}
         {/* <Route path="/women/NewProfile" element={<CreateNewProfile />} /> */}
+        {/* <Route path="/profile/:id/edit" element={<EditProfile />} /> */}
         {/* Routes : 
       - Edit profile page => contributors
       - Create new profile page => contributor
@@ -46,7 +50,6 @@ function App() {
       Stretch Goals : 
       - Get Contributor backend listing all of theur contributions and status for each 
       - Backend Admin where all pending contributions are waiting to be reviewed*/}
-        {/* <Route path="/login" element={Login} /> */}
         <Route path="/signup" element={<Signup />} /> {/* - Sign up page  */}
         <Route path="/login" element={<Login fetchUser={fetchUser} />} />
       </Routes>

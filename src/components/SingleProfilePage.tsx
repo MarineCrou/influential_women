@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 // import SingleProfileCard from "./SingleProfileCard";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { baseUrl } from "../config";
+import { IUser } from "../Interfaces/user";
 
-interface Data {
-  name: string;
-  email: string;
+interface SingleProfileProps {
+  user: null | IUser;
+  setUser: Function;
 }
 
-function SingleProfilePage() {
+function SingleProfilePage({ user, setUser }: SingleProfileProps) {
+  console.log("user in the Single Profile Page: ", user);
+
   const navigate = useNavigate();
   const [woman, getWoman] = useState("" as any);
   const { id } = useParams(); // Use useParams to get the parameters.
@@ -34,13 +37,17 @@ function SingleProfilePage() {
 
   console.log("SINGLE CARDS - GOT THE INDIVIDUAL WOMAN", woman);
 
-  //   const { name, bio, img, nationality, achievements, additionalContent } =
-  // woman.contributions[0];
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white py-10">
-      <div className="w-full max-w-4xl bg-white rounded-lg  p-6">
+      <div className="w-full max-w-4xl bg-white rounded-lg  p-6 relative">
         <div className="text-center">
+          {user && (
+            <Link to={"/profile/:id/edit"}>
+              <button className="text-sm hover:text-indigo-700 text-indigo-500 font-bold py-2 px-4 rounded-full">
+                Edit Profile ✍️
+              </button>
+            </Link>
+          )}
           <h1 className="text-5xl font-semibold text-gray-800 mb-4 font-serif pt-20">
             {woman && woman.name}
           </h1>
@@ -80,13 +87,21 @@ function SingleProfilePage() {
               {woman.additionalContent}
             </p>
           </div>
-
-          <button
-            className="mt-8 py-2 px-4 text-indigo-500 font-semibold rounded-lg hover:text-indigo-700 transition-colors duration-300 mx-auto block"
-            onClick={() => navigate("/")}
-          >
-            Home Page ➡️
-          </button>
+          <div className="mt-8 flex justify-center space-x-4">
+            <button
+              className="py-2 px-4 text-indigo-500 font-semibold rounded-lg hover:text-indigo-700 transition-colors duration-300"
+              onClick={() => navigate("/")}
+            >
+              Home Page ➡️
+            </button>
+            {user && (
+              <Link to={"/profile/:id/edit"}>
+                <button className="py-2 px-4 text-indigo-500 font-semibold rounded-lg hover:text-indigo-700 transition-colors duration-300">
+                  Edit Profile ✍️
+                </button>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </div>
