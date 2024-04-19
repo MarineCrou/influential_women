@@ -3,9 +3,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { baseUrl } from "../config";
 
+interface Data {
+  name: string;
+  email: string;
+}
+
 function SingleProfilePage() {
   const navigate = useNavigate();
-  const [woman, getWoman] = useState("");
+  const [woman, getWoman] = useState(null as any);
   const { id } = useParams(); // Use useParams to get the parameters.
   console.log("Params from URL:", useParams());
 
@@ -37,7 +42,7 @@ function SingleProfilePage() {
       <div className="w-full max-w-4xl bg-white rounded-lg  p-6">
         <div className="text-center">
           <h1 className="text-5xl font-semibold text-gray-800 mb-4 font-serif pt-20">
-            {woman.name}
+            {woman && woman.name}
           </h1>
           <h2 className="text-2xl font-semibold text-gray-700 mb-4">
             {woman.field}
