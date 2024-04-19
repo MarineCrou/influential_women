@@ -10,7 +10,7 @@ interface Data {
 
 function SingleProfilePage() {
   const navigate = useNavigate();
-  const [woman, getWoman] = useState(null as any);
+  const [woman, getWoman] = useState("" as any);
   const { id } = useParams(); // Use useParams to get the parameters.
   console.log("Params from URL:", useParams());
 

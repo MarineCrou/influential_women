@@ -67,15 +67,21 @@ function Navbar({ user, setUser }: NavbarProps) {
           <RouterLink to={"/aboutus"}>About Us</RouterLink>
         </div>
         <div>
-          <RouterLink to={"/signup"} className="px-4 signup">
-            Sign Up
-          </RouterLink>
-          <RouterLink to={"/login"} className="px-4 login">
-            Login
-          </RouterLink>
-          <RouterLink to={"/"} onClick={logout}>
-            Logout
-          </RouterLink>
+          {!user && (
+            <RouterLink to={"/signup"} className="px-4 signup">
+              Sign Up
+            </RouterLink>
+          )}
+          {!user && (
+            <RouterLink to={"/login"} className="px-4 login">
+              Login
+            </RouterLink>
+          )}
+          {user && (
+            <RouterLink to={"/"} onClick={logout}>
+              Logout
+            </RouterLink>
+          )}
         </div>
       </div>
       <hr />
