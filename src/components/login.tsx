@@ -40,7 +40,7 @@ export default function Login({ fetchUser }: { fetchUser: Function }) {
     }
   }
 
-  console.log(formData);
+  console.log("user in login:", formData);
 
   return (
     <>
@@ -49,7 +49,7 @@ export default function Login({ fetchUser }: { fetchUser: Function }) {
         <div className="hidden lg:block w-1/2">
           <img
             src="https://i.pinimg.com/736x/6b/1b/22/6b1b22573f9f3d4bba11a9fa5cb45652.jpg"
-            alt="Sign Up"
+            alt="Log In"
             className="w-full h-full object-cover"
           />
         </div>
@@ -126,7 +126,7 @@ export default function Login({ fetchUser }: { fetchUser: Function }) {
                 type="submit"
                 className="w-full bg-indigo-600 text-white rounded-md py-2 px-4 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
               >
-                Sign Up
+                Log In
               </button>
             </form>
             <hr />

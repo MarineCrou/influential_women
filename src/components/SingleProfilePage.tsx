@@ -82,7 +82,7 @@ function SingleProfilePage() {
           </div>
 
           <button
-            className="mt-8 py-2 px-4 text-indigo-500 text-white font-semibold rounded-lg hover:text-indigo-700 transition-colors duration-300 mx-auto block"
+            className="mt-8 py-2 px-4 text-indigo-500 font-semibold rounded-lg hover:text-indigo-700 transition-colors duration-300 mx-auto block"
             onClick={() => navigate("/")}
           >
             Home Page ➡️

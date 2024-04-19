@@ -8,6 +8,7 @@ import AboutUs from "./components/AboutUs";
 import Login from "./components/login";
 import SingleProfilePage from "./components/SingleProfilePage";
 import axios from "axios";
+import { baseUrl } from "./config";
 // import CreateNewProfile from "./components/CreateProfilePage";
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
 
   async function fetchUser() {
     const token = localStorage.getItem("token");
-    const resp = await axios.get("/api/user", {
+    const resp = await axios.get(`${baseUrl}/user`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     setUser(resp.data);
@@ -26,16 +27,18 @@ function App() {
     if (token) fetchUser();
   }, []);
 
+  console.log("User in app.tx:", user);
+
   return (
     <Router>
-      <Navbar />
+      <Navbar user={user} setUser={setUser} />
       <Routes>
         <Route path="/" element={<Home />} />
         {/*  HOME PAGE => Features hero baner (women + h1) + Feature woman of the month + list of all women */}
         <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="/profile/:id" element={<SingleProfilePage />} />
+        <Route path="/profile/:id" element={<SingleProfilePage />} />{" "}
+        {/* detailed profile page*/}
         {/* <Route path="/women/NewProfile" element={<CreateNewProfile />} /> */}
-        {/* Single profile page - For detailed info*/}
         {/* Routes : 
       - Edit profile page => contributors
       - Create new profile page => contributor
@@ -46,7 +49,6 @@ function App() {
         {/* <Route path="/login" element={Login} /> */}
         <Route path="/signup" element={<Signup />} /> {/* - Sign up page  */}
         <Route path="/login" element={<Login fetchUser={fetchUser} />} />
-        Page
       </Routes>
     </Router>
   );

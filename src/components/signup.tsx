@@ -68,7 +68,7 @@ const Signup = () => {
         {/* Form container */}
         <div className="w-full lg:w-1/2 flex items-center justify-center p-4">
           <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
-            <h3 className="text-lg font-bold text-gray-500 font-serif mt-3 mb-2">
+            <h3 className="text-lg font-normal text-gray-500 mt-3 mb-2">
               Sign Up
             </h3>
             <h2 className="text-2xl font-bold text-gray-900 font-serif mb-7">
@@ -169,7 +169,7 @@ const Signup = () => {
                 type="submit"
                 className="w-full bg-indigo-600 text-white rounded-md py-2 px-4 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
               >
-                Log In
+                Sign Up
               </button>
             </form>
           </div>

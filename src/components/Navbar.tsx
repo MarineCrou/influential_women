@@ -1,6 +1,7 @@
 import React from "react";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { scroller } from "react-scroll";
+import { IUser } from "../Interfaces/user";
 
 type CustomLinkProps = {
   scrollTo: string;
@@ -8,9 +9,21 @@ type CustomLinkProps = {
   className?: string;
 };
 
-function Navbar() {
+interface NavbarProps {
+  user: null | IUser;
+  setUser: Function;
+}
+
+function Navbar({ user, setUser }: NavbarProps) {
+  console.log("user in the navbar: ", user);
   const location = useLocation();
   const navigate = useNavigate();
+
+  function logout() {
+    localStorage.removeItem("token");
+    setUser(null);
+    navigate("/");
+  }
 
   const CustomLink = ({ scrollTo, children, className }: CustomLinkProps) => {
     const handleNavigate = () => {
@@ -59,6 +72,9 @@ function Navbar() {
           </RouterLink>
           <RouterLink to={"/login"} className="px-4 login">
             Login
+          </RouterLink>
+          <RouterLink to={"/"} onClick={logout}>
+            Logout
           </RouterLink>
         </div>
       </div>
