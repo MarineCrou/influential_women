@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 // I need to link this card to the Single Profile CARD, to get the details on this profile
 
-function ProfileListHomeCard({ key, id, contributions }: any) {
+function ProfileListHomeCard({ id, contributions }: any) {
   if (!contributions) return null; // Simplified check
 
   const { name, img, nationality, date_of_birth, field } =

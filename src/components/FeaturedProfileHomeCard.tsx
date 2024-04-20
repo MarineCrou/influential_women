@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function FeaturedProfileHomeCard({ contributions }: any) {
+function FeaturedProfileHomeCard({ id, contributions }: any) {
   if (!contributions || contributions.length === 0) return null; // Check for undefined or empty contributions
 
   const { name, bio, img, nationality, achievements, field } = contributions[0];
@@ -15,6 +15,12 @@ function FeaturedProfileHomeCard({ contributions }: any) {
           {/* <p className="text-md text-gray-500 mt-2">{field}</p> */}
           <p className="text-md text-gray-500 mt-2">{field}</p>
           <p className="mt-4 text-gray-700"> {bio}</p>
+          <Link to={`/profile/${id}`}>
+            {" "}
+            <button className="mt-5  text-indigo-500 hover:text-indigo-700">
+              Learn More ➡️
+            </button>
+          </Link>
         </div>
         <div className="md:flex-1">{img && <img src={img} alt={name} />}</div>
       </div>

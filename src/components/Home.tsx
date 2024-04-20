@@ -80,7 +80,10 @@ function Home() {
       {/* Featured Woman on Home page (randomly featured, evertime the page is loaded) */}
       <section id="featuredWoman">
         {woman && (
-          <FeaturedProfileHomeCard contributions={woman?.contributions} />
+          <FeaturedProfileHomeCard
+            id={woman.id}
+            contributions={woman?.contributions}
+          />
         )}
       </section>
       <hr />

@@ -9,6 +9,7 @@ import Login from "./components/login";
 import SingleProfilePage from "./components/SingleProfilePage";
 import axios from "axios";
 import { baseUrl } from "./config";
+import EditProfile from "./components/EditProfile";
 // import CreateNewProfile from "./components/CreateProfilePage";
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
         />{" "}
         {/* detailed profile page*/}
         {/* <Route path="/women/NewProfile" element={<CreateNewProfile />} /> */}
-        {/* <Route path="/profile/:id/edit" element={<EditProfile />} /> */}
+        <Route path="/profile/:id/edit-:name" element={<EditProfile />} />
         {/* Routes : 
       - Edit profile page => contributors
       - Create new profile page => contributor

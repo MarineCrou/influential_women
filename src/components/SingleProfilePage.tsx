@@ -14,7 +14,7 @@ function SingleProfilePage({ user, setUser }: SingleProfileProps) {
 
   const navigate = useNavigate();
   const [woman, getWoman] = useState("" as any);
-  const { id } = useParams(); // Use useParams to get the parameters.
+  const { id, name } = useParams(); // Use useParams to get the parameters.
   console.log("Params from URL:", useParams());
 
   useEffect(() => {
@@ -42,7 +42,7 @@ function SingleProfilePage({ user, setUser }: SingleProfileProps) {
       <div className="w-full max-w-4xl bg-white rounded-lg  p-6 relative">
         <div className="text-center">
           {user && (
-            <Link to={"/profile/:id/edit"}>
+            <Link to={`/profile/${id}/edit`}>
               <button className="text-sm hover:text-indigo-700 text-indigo-500 font-bold py-2 px-4 rounded-full">
                 Edit Profile ✍️
               </button>
@@ -95,7 +95,7 @@ function SingleProfilePage({ user, setUser }: SingleProfileProps) {
               Home Page ➡️
             </button>
             {user && (
-              <Link to={"/profile/:id/edit"}>
+              <Link to={`/profile/${id}/edit`}>
                 <button className="py-2 px-4 text-indigo-500 font-semibold rounded-lg hover:text-indigo-700 transition-colors duration-300">
                   Edit Profile ✍️
                 </button>
