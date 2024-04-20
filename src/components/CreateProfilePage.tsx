@@ -61,14 +61,14 @@ function CreateNewProfile() {
             Create A New Profile
           </h1>
           <h3 className="text-xl  text-indigo-500 mb-8">
-            Share inspiring women that need to be recognized
+            Thank you for helping remember all these incredible women !
           </h3>
 
           <div className="space-y-4">
             <input
               type="text"
               name="name"
-              placeholder="Name"
+              placeholder="Influential Woman's Name"
               value={womanData.name}
               onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-4 focus:ring-indigo-400 transition duration-200 ease-in-out"
@@ -95,7 +95,7 @@ function CreateNewProfile() {
             <input
               type="text"
               name="field"
-              placeholder="Field"
+              placeholder="Field of influence. eg: Charity, Civil Rights, Arts..."
               value={womanData.field}
               onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-4 focus:ring-indigo-400 transition duration-200 ease-in-out"
@@ -115,7 +115,7 @@ function CreateNewProfile() {
               value={womanData.bio}
               onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-4 focus:ring-indigo-400 transition duration-200 ease-in-out"
-              rows="5"
+              //   rows="5"
               required
             ></textarea>
             <textarea
@@ -124,7 +124,7 @@ function CreateNewProfile() {
               value={womanData.achievements}
               onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-4 focus:ring-indigo-400 transition duration-200 ease-in-out"
-              rows="5"
+              //   rows="5"
               required
             ></textarea>
             <textarea
@@ -133,7 +133,7 @@ function CreateNewProfile() {
               value={womanData.additionalContent}
               onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-4 focus:ring-indigo-400 transition duration-200 ease-in-out"
-              rows="3"
+              //   rows="3"
             ></textarea>
           </div>
 
