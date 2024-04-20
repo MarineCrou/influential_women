@@ -10,7 +10,7 @@ import SingleProfilePage from "./components/SingleProfilePage";
 import axios from "axios";
 import { baseUrl } from "./config";
 import EditProfile from "./components/EditProfile";
-// import CreateNewProfile from "./components/CreateProfilePage";
+import CreateNewProfile from "./components/CreateProfilePage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -42,8 +42,8 @@ function App() {
           element={<SingleProfilePage user={user} setUser={setUser} />}
         />{" "}
         {/* detailed profile page*/}
-        {/* <Route path="/women/NewProfile" element={<CreateNewProfile />} /> */}
-        <Route path="/profile/:id/edit-:name" element={<EditProfile />} />
+        <Route path="/women/NewProfile" element={<CreateNewProfile />} />
+        <Route path="/profile/:id/edit" element={<EditProfile />} />
         {/* Routes : 
       - Edit profile page => contributors
       - Create new profile page => contributor

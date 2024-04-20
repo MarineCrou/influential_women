@@ -4,10 +4,12 @@ import { baseUrl } from "../config";
 import axios from "axios";
 
 function EditProfile() {
-  const [woman, setWoman] = useState("" as any);
-  const { id } = useParams();
   const navigate = useNavigate();
+
+  const { id } = useParams(); // Getting the id from the URL, which matched the id in the app route
   console.log("This is the woman id on the edit page", id);
+
+  const [woman, setWoman] = useState("" as any);
 
   const [formData, setFormData] = useState({
     contribution_type: "",
@@ -31,7 +33,7 @@ function EditProfile() {
       try {
         const resp = await fetch(`${baseUrl}/women/${id}`);
         const profileData = await resp.json();
-        setWoman(profileData.contributions[0]);
+        setFormData(profileData.contributions[0]);
       } catch (error) {
         console.error("Failed to fetch woman data:", error);
       }

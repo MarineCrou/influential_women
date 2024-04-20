@@ -11,11 +11,12 @@ interface SingleProfileProps {
 
 function SingleProfilePage({ user, setUser }: SingleProfileProps) {
   console.log("user in the Single Profile Page: ", user);
-
   const navigate = useNavigate();
-  const [woman, getWoman] = useState("" as any);
+
   const { id, name } = useParams(); // Use useParams to get the parameters.
   console.log("Params from URL:", useParams());
+
+  const [woman, getWoman] = useState("" as any);
 
   useEffect(() => {
     console.log("Individual profile Page mounted 🙋‍♀️🎉");
@@ -23,9 +24,7 @@ function SingleProfilePage({ user, setUser }: SingleProfileProps) {
     async function fetchWoman() {
       try {
         const resp = await fetch(`${baseUrl}/women/${id}`);
-        console.log(`this is the response ${resp}`);
         const dataFetched = await resp.json();
-        console.log(`This is the data fetched: ${dataFetched}`);
         getWoman(dataFetched.contributions[0]);
       } catch (error) {
         console.error("Failed to fetch woman data:", error);

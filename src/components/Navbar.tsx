@@ -78,12 +78,12 @@ function Navbar({ user, setUser }: NavbarProps) {
             </RouterLink>
           )}
           {user && (
-            <RouterLink to={"/createProfile"} className="mx-4">
+            <RouterLink to={"/women/NewProfile"} className="mx-4">
               Create Profile
             </RouterLink>
           )}
           {user && (
-            <RouterLink to={"/"} onClick={logout}>
+            <RouterLink to={"/"} onClick={logout} className="mr-12 ml-4">
               Logout
             </RouterLink>
           )}
