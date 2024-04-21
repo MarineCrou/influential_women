@@ -11,7 +11,7 @@ function EditProfile() {
 
   const [womanData, setWomanData] = useState({
     achievements: "",
-    additional_content: "",
+    additionnal_content: "",
     bio: "",
     contribution_type: "",
     date_of_birth: "",
@@ -22,6 +22,9 @@ function EditProfile() {
     status: "",
   } as any);
   console.log(womanData);
+
+  // Dropdown menu
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   // Get the initial data from the backend to display:
   useEffect(() => {
@@ -54,6 +57,16 @@ function EditProfile() {
     }));
   }
 
+  // Dropdown Menu toggle
+  function toggleDropdown() {
+    setDropdownOpen(!dropdownOpen);
+  }
+  // Dropdown Menu options
+  function handleDropdownChoice(value: string) {
+    setWomanData((prev: any) => ({ ...prev, contribution_type: value }));
+    setDropdownOpen(false);
+  }
+
   async function handleSubmit(e: any) {
     e.preventDefault();
     const token = localStorage.getItem("token");
@@ -71,46 +84,73 @@ function EditProfile() {
     }
   }
 
+  console.log(womanData.contribution_type);
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 py-24">
       <div className="w-full max-w-3xl bg-white rounded-md shadow-xl p-8">
-        <form onSubmit={handleSubmit} className="text-center space-y-6">
-          <h1 className="text-4xl font-bold text-gray-800 mb-8 font-serif">
-            Edit Profile
-          </h1>
+        <form onSubmit={handleSubmit} className="text-center ">
+          <h2 className="text-2xl text-gray-600 mb-4">Edit Profile</h2>
+          <h3 className="text-5xl font-bold text-gray-800 font-serif">
+            <span className="relative text-white bg-indigo-700">
+              {" "}
+              {womanData.name}{" "}
+            </span>
+          </h3>
+          <h3></h3>
+          <h1 className="text-4xl font-bold text-gray-800 mb-12 font-serif"></h1>
 
           <div className="space-y-4">
             <div>
               <button
                 type="button"
-                className="inline-flex w-full gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                id="menu-button"
-                aria-expanded="true"
-                aria-haspopup="true"
+                onClick={toggleDropdown}
+                className="inline-flex w-full gap-x-1.5 items-center justify-between rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
               >
-                Contribution Type
+                {womanData.contribution_type}
                 <svg
-                  className="-mr-1 h-5 w-5 text-gray-400"
+                  className="h-5 w-5 text-gray-400"
                   viewBox="0 0 20 20"
                   fill="currentColor"
-                  aria-hidden="true"
                 >
                   <path
-                    fill-rule="evenodd"
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 010-1.04z"
+                    clipRule="evenodd"
                   />
                 </svg>
               </button>
+              {dropdownOpen && (
+                <div
+                  className="absolute mt-2 w-full rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  role="menu"
+                  aria-orientation="vertical"
+                >
+                  <div className="py-1" role="none">
+                    {[
+                      "New Profile Creation",
+                      "Image Upload/Edit",
+                      "Bio Edit",
+                      "Achievements Edit",
+                      "Additional Content Edit",
+                      "Correction Submission",
+                      "Historical Context Addition",
+                      "Other",
+                    ].map((option, index) => (
+                      <button
+                        key={index}
+                        onClick={() => handleDropdownChoice(option)}
+                        className="text-gray-700 block w-full text-left px-4 py-2 text-sm"
+                        role="menuitem"
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
-            <input
-              type="url"
-              name="contribution_type"
-              placeholder="Contribution Type"
-              value={womanData.contribution_type}
-              onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-4 focus:ring-indigo-400 transition duration-200 ease-in-out"
-            />
+
             <input
               type="text"
               name="name"
@@ -174,9 +214,9 @@ function EditProfile() {
               required
             ></textarea>
             <textarea
-              name="additional_content"
+              name="additionnal_content"
               placeholder="Additional Content"
-              value={womanData.additional_content}
+              value={womanData.additionnal_content}
               onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-4 focus:ring-indigo-400 transition duration-200 ease-in-out"
               //   rows="3"

@@ -53,44 +53,77 @@ function Navbar({ user, setUser }: NavbarProps) {
     );
   };
 
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <nav className="bg-grey-100 text-black p-0 font-serif text-lg font-semibold navbar">
-      <hr />
-      <div className="w-full flex justify-between items-center mt-3 mb-3 pr-0 px-0">
-        <div>
-          <CustomLink className="px-4" scrollTo="featuredWoman">
-            Featured Woman
-          </CustomLink>
-          <CustomLink className="px-4 mt-6" scrollTo="unsungWomen">
+    <>
+      <nav className="bg-white p-4">
+        <div className="container mx-auto flex flex-wrap justify-between items-center ">
+          <RouterLink to="/" className="text-lg font-semibold font-serif">
             Unsung Women
-          </CustomLink>
-          <RouterLink to={"/aboutus"}>About Us</RouterLink>
+          </RouterLink>
+          <div className="hidden md:flex font-serif">
+            <CustomLink
+              className="px-4 hover:text-indigo-700"
+              scrollTo="featuredWoman"
+            >
+              Featured Woman
+            </CustomLink>
+            <CustomLink
+              className="px-4 hover:text-indigo-700"
+              scrollTo="unsungWomen"
+            >
+              Unsung Women
+            </CustomLink>
+            <RouterLink to="/aboutus " className="px-4 hover:text-indigo-700">
+              About Us
+            </RouterLink>
+          </div>
+          <div className="hidden md:flex font-serif ">
+            {!user ? (
+              <>
+                <RouterLink to="/signup" className="px-4 hover:text-indigo-700">
+                  Sign Up
+                </RouterLink>
+                <RouterLink to="/login" className="px-4 hover:text-indigo-700">
+                  Login
+                </RouterLink>
+              </>
+            ) : (
+              <>
+                <RouterLink
+                  to="/women/NewProfile"
+                  className="px-4 hover:text-indigo-700"
+                >
+                  Create Profile
+                </RouterLink>
+                <RouterLink
+                  to="/"
+                  onClick={logout}
+                  className="px-4 hover:text-indigo-700"
+                >
+                  Logout
+                </RouterLink>
+              </>
+            )}
+          </div>
+          {/* <button onClick={toggleMenu} className="md:hidden">
+          Menu
+        </button> */}
+          {/* <div className={`${isOpen ? "block" : "hidden"} md:hidden`}> */}
+          {/* Mobile menu items here */}
+          {/* </div> */}
         </div>
-        <div>
-          {!user && (
-            <RouterLink to={"/signup"} className="px-4 signup">
-              Sign Up
-            </RouterLink>
-          )}
-          {!user && (
-            <RouterLink to={"/login"} className="px-4 login">
-              Login
-            </RouterLink>
-          )}
-          {user && (
-            <RouterLink to={"/women/NewProfile"} className="mx-4">
-              Create Profile
-            </RouterLink>
-          )}
-          {user && (
-            <RouterLink to={"/"} onClick={logout} className="mr-12 ml-4">
-              Logout
-            </RouterLink>
-          )}
-        </div>
-      </div>
+        {/* <div className="md:hidden" id="mobile-menu"> */}
+        {/* Mobile menu content, which can be toggled on/off */}
+        {/* </div> */}
+      </nav>
       <hr />
-    </nav>
+    </>
   );
 }
 
