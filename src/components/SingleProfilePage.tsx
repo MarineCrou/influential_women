@@ -43,12 +43,15 @@ function SingleProfilePage({ user, setUser }: SingleProfileProps) {
         <div className="text-center">
           {user && (
             <Link to={`/profile/${id}/edit`}>
-              <button className="text-sm hover:text-indigo-700 text-indigo-500 font-bold py-2 px-4 rounded-full">
+              <div
+                className="text-sm text-indigo-500 hover:text-indigo-900 text-grey-500
+                 py-2 px-4 rounded-full text-right"
+              >
                 Edit Profile ✍️
-              </button>
+              </div>
             </Link>
           )}
-          <h1 className="text-5xl font-semibold text-gray-800 mb-4 font-serif pt-20">
+          <h1 className="text-5xl font-semibold text-gray-800 mb-4 font-serif pt-4">
             {woman && woman.name}
           </h1>
           <h2 className="text-2xl font-semibold text-gray-700 mb-4">
@@ -94,13 +97,6 @@ function SingleProfilePage({ user, setUser }: SingleProfileProps) {
             >
               Home Page ➡️
             </button>
-            {user && (
-              <Link to={`/profile/${id}/edit`}>
-                <button className="py-2 px-4 text-indigo-500 font-semibold rounded-lg hover:text-indigo-700 transition-colors duration-300">
-                  Edit Profile ✍️
-                </button>
-              </Link>
-            )}
           </div>
         </div>
       </div>

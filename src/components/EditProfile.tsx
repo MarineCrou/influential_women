@@ -19,7 +19,6 @@ function EditProfile() {
     img: "",
     name: "",
     nationality: "",
-    status: "",
   } as any);
   console.log(womanData);
 
@@ -70,14 +69,31 @@ function EditProfile() {
   async function handleSubmit(e: any) {
     e.preventDefault();
     const token = localStorage.getItem("token");
-    const dataToSend = {
-      latest_contribution: womanData,
+
+    // Prepare a clean contribution object
+    const contribution = {
+      contribution_type: womanData.contribution_type,
+      name: womanData.name,
+      date_of_birth: womanData.date_of_birth,
+      nationality: womanData.nationality,
+      img: womanData.img,
+      bio: womanData.bio,
+      achievements: womanData.achievements,
+      field: womanData.field,
+      additionnal_content: womanData.additionnal_content,
     };
+
+    const dataToSend = {
+      contributions: [contribution],
+    };
+
+    console.log("Sending data:", dataToSend); // Check what is being sent
+
     try {
       const resp = await axios.post(`${baseUrl}/women/${id}`, dataToSend, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log("Profile updated:", resp.data);
+      console.log("Response data:", resp.data); // Log the response data
       navigate(`/profile/${id}`);
     } catch (error: any) {
       console.error("Failed to update profile:", error.response.data);
@@ -87,7 +103,7 @@ function EditProfile() {
   console.log(womanData.contribution_type);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 py-24">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 py-10">
       <div className="w-full max-w-3xl bg-white rounded-md shadow-xl p-8">
         <form onSubmit={handleSubmit} className="text-center ">
           <h2 className="text-2xl text-gray-600 mb-4">Edit Profile</h2>

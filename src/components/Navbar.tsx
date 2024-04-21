@@ -108,6 +108,12 @@ function Navbar({ user, setUser }: NavbarProps) {
                 >
                   Logout
                 </RouterLink>
+                <RouterLink
+                  to="/account"
+                  className="px-4 hover:text-indigo-700"
+                >
+                  Account
+                </RouterLink>
               </>
             )}
           </div>
