@@ -11,6 +11,7 @@ import axios from "axios";
 import { baseUrl } from "./config";
 import EditProfile from "./components/EditProfile";
 import CreateNewProfile from "./components/CreateProfilePage";
+import Account from "./components/Account";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -46,9 +47,13 @@ function App() {
         <Route path="/profile/:id/edit" element={<EditProfile />} />
         <Route path="/signup" element={<Signup />} /> {/* - Sign up page  */}
         <Route path="/login" element={<Login fetchUser={fetchUser} />} />
+        <Route
+          path="/account"
+          element={<Account user={user} fetchUser={fetchUser} />}
+        />
         {/* Routes : 
       Stretch Goals : 
-      - Get Contributor backend listing all of their contributions (and status for each contribution)
+
       - Backend Admin where all pending contributions are waiting to be reviewed
            - Delete profile => admin rights 
            - Approve, deny contributions before being published */}

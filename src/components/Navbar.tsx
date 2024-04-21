@@ -19,12 +19,6 @@ function Navbar({ user, setUser }: NavbarProps) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  function logout() {
-    localStorage.removeItem("token");
-    setUser(null);
-    navigate("/");
-  }
-
   const CustomLink = ({ scrollTo, children, className }: CustomLinkProps) => {
     const handleNavigate = () => {
       if (location.pathname !== "/") {
@@ -101,13 +95,7 @@ function Navbar({ user, setUser }: NavbarProps) {
                 >
                   Create Profile
                 </RouterLink>
-                <RouterLink
-                  to="/"
-                  onClick={logout}
-                  className="px-4 hover:text-indigo-700"
-                >
-                  Logout
-                </RouterLink>
+
                 <RouterLink
                   to="/account"
                   className="px-4 hover:text-indigo-700"
