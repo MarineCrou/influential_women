@@ -44,15 +44,14 @@ function App() {
         {/* detailed profile page*/}
         <Route path="/women/NewProfile" element={<CreateNewProfile />} />
         <Route path="/profile/:id/edit" element={<EditProfile />} />
-        {/* Routes : 
-      - Edit profile page => contributors
-      - Create new profile page => contributor
-      
-      Stretch Goals : 
-      - Get Contributor backend listing all of theur contributions and status for each 
-      - Backend Admin where all pending contributions are waiting to be reviewed*/}
         <Route path="/signup" element={<Signup />} /> {/* - Sign up page  */}
         <Route path="/login" element={<Login fetchUser={fetchUser} />} />
+        {/* Routes : 
+      Stretch Goals : 
+      - Get Contributor backend listing all of their contributions (and status for each contribution)
+      - Backend Admin where all pending contributions are waiting to be reviewed
+           - Delete profile => admin rights 
+           - Approve, deny contributions before being published */}
       </Routes>
     </Router>
   );

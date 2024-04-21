@@ -25,7 +25,8 @@ function SingleProfilePage({ user, setUser }: SingleProfileProps) {
       try {
         const resp = await fetch(`${baseUrl}/women/${id}`);
         const dataFetched = await resp.json();
-        getWoman(dataFetched.contributions[0]);
+        console.log(`This is the data fetched: ${dataFetched}`);
+        getWoman(dataFetched.latest_contribution);
       } catch (error) {
         console.error("Failed to fetch woman data:", error);
       }

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// I need to link this card to the Single Profile CARD, to get the details on this profile
+// NEED TO CHANGE THIS CARD TO RETURN ONLY THE LASTEST APPROVED CONTRIBUTION ! => backend
 
 function ProfileListHomeCard({ id, contributions }: any) {
   if (!contributions) return null; // Simplified check
