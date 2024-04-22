@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function ProfileListHomeCard({ id, contributions }: any) {
   if (!contributions) return null; // Simplified check
 
-  const { name, img, nationality, date_of_birth, field } =
+  const { name, img, date_of_birth, field } =
     contributions[contributions.length - 1]; // Destructure the necessary properties
 
   return (
