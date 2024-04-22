@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../config";
 import { Link } from "react-router-dom";
+import unsungWomen from "../media/unsung-woman-logo-2.webp";
 
 interface ErrorData {
   username: string | number | readonly string[] | undefined;
@@ -59,7 +60,7 @@ const Signup = () => {
         {/* Image container */}
         <div className="hidden lg:block w-1/2">
           <img
-            src="../media/unsung-woman-logo-2.webp"
+            src={unsungWomen}
             alt="Sign Up"
             className="w-full h-full object-cover"
           />

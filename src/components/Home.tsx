@@ -5,6 +5,8 @@ import FeaturedProfileHomeCard from "./FeaturedProfileHomeCard";
 import ProfileListHomeCard from "./ProfileListHomeCard";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../config";
+import bannerVideo from "../media/baner-video-women.mp4";
+import logo from "../media/unsung-woman-logo-1.png";
 
 interface Women {
   //
@@ -51,8 +53,8 @@ function Home() {
           muted
           playsInline
           className="absolute z-0 w-full h-full object-cover" // Use 'object-cover' to ensure full coverage
-          src="./media/baner-video-women.mp4"
-          id="baner video"
+          src={bannerVideo}
+          id="banner-video"
         >
           Your browser does not support the video tag.
         </video>
@@ -112,14 +114,10 @@ function Home() {
       <footer className="bg-white rounded-lg shadow dark:bg-gray-900 m-4">
         <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
           <div className="sm:flex sm:items-center sm:justify-between">
-            <img
-              src="../media/unsung-woman-logo-1.png"
-              className="h-8"
-              alt="Unsung Women Logo"
-            />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white font-serif">
+            <img src={logo} className="h-16" alt="Unsung Women Logo" />
+            {/* <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white font-serif">
               Unsung Women
-            </span>
+            </span> */}
 
             <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
               <li>

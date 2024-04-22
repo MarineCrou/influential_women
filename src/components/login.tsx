@@ -1,6 +1,9 @@
 import axios from "axios";
 import { SyntheticEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import woman from "../media/women.webp";
+import woman2 from "../media/woman-fauteuil-desk.png";
+import loginVideo from "../media/login-video.mp4";
 
 interface LoginData {
   username: string;
@@ -48,7 +51,7 @@ export default function Login({ fetchUser }: { fetchUser: Function }) {
         {/* Image container */}
         <div className="hidden lg:block w-1/2">
           <img
-            src="https://i.pinimg.com/736x/6b/1b/22/6b1b22573f9f3d4bba11a9fa5cb45652.jpg"
+            src={woman}
             alt="Log In"
             className="w-full h-full object-cover"
           />

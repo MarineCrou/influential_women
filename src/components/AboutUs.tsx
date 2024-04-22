@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logo from "../media/unsung-woman-logo-1.png";
 
 function AboutUs() {
   return (
@@ -46,9 +47,7 @@ function AboutUs() {
             </button>
           </Link>
         </div>
-        <div className="md:flex-1">
-          {<img src="../media/unsung-woman-logo-1.png" alt="Logo" />}
-        </div>
+        <div className="md:flex-1">{<img src={logo} alt="Logo" />}</div>
       </div>
     </div>
   );
