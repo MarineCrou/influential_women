@@ -14,7 +14,7 @@ function FeaturedProfileHomeCard({ id, contributions }: any) {
           </h3>
           {/* <p className="text-md text-gray-500 mt-2">{field}</p> */}
           <p className="text-md text-gray-500 mt-2">{field}</p>
-          <p className="mt-4 text-gray-700"> {bio}</p>
+          <p className="mt-4 text-gray-700"> {achievements}</p>
           <Link to={`/profile/${id}`}>
             {" "}
             <button className="mt-5  text-indigo-500 hover:text-indigo-700">
