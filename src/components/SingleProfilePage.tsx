@@ -87,7 +87,7 @@ function SingleProfilePage({ user, setUser }: SingleProfileProps) {
               {woman.bio}
             </p>
             <p className="text-lg leading-relaxed text-justify">
-              {woman.additionalContent}
+              {woman.additionnalContent}
             </p>
           </div>
           <div className="mt-8 flex justify-center space-x-4">
