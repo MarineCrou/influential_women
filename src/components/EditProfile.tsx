@@ -94,7 +94,7 @@ function EditProfile() {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log("Response data:", resp.data); // Log the response data
-      navigate(`/profile/${id}`);
+      navigate(`/account`);
     } catch (error: any) {
       console.error("Failed to update profile:", error.response.data);
     }
