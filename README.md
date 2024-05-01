@@ -113,3 +113,34 @@ Running on http://127.0.0.1:4000
 3. **_Seeding the Database:_** To seed your database, run: `pipenv run python seed.py`
 
 4. **_Data Visualization:_** For database management and visualization, `TablePlus` is recommended. It's a versatile desktop application suitable for various databases.
+
+## Features
+
+### Comprehensive Directory
+
+- Our platform is a full-stack, Wikipedia-style directory dedicated to highlighting influential women from diverse fields. It features detailed profiles that include biographies, achievements, and related multimedia.
+
+### Dynamic Homepage
+
+- **Engaging Video Banner**: The homepage features a captivating video banner created with Canva, setting an inspiring tone for the visitors.
+- **Random Woman Feature**: Each time the homepage is loaded, a random influential woman is featured. This not only enhances the UI/UX but also educates users about women they may not yet know.
+- **Browse Profiles**: The homepage also displays the entire directory. Each profile shows the woman's image, name, and field. Clicking on a profile takes users to a detailed page where they can learn more about her contributions and achievements.
+
+### Interactive User Contributions
+
+- **Add, Edit and Contribute**: Registered users who are logged in have the ability to edit and update profiles. This feature allows users to contribute accurate and additional information, ensuring the platform remains current and factual. They also have the ability to add a new profile to the directory. All contributions will be published only if/when approved by administrators. If denied, a new woman's profile will not be published and an existing woman's profile will not be edited.
+
+### Moderation and Submission Tracking
+
+- **Content Moderation**: All user contributions undergo a thorough review by administrators before being published, maintaining the integrity and accuracy of the content.
+- **Track Contributions**: Contributors can track the status of their submissions (approved, pending approval, denied) through their account page, providing transparency and keeping them engaged with the process. When a contribution has been reviewed, it's status will automatically be updated in the contributor's account.
+
+### Account Management
+
+- Users can manage their account page, to track their contributions and their statuses and engage with the community, enhancing their overall interaction with the platform.
+
+## Technology Stack
+
+## Design and Planning
+
+## Project Status / Future Enhancements
