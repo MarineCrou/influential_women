@@ -141,6 +141,36 @@ Running on http://127.0.0.1:4000
 
 ## Technology Stack
 
+Our project leverages several modern technologies designed to create a robust and user-friendly experience. Below is an outline of the main tools and their roles in our system:
+
+### Front-end:
+
+- **React**: A JavaScript library used for building dynamic and responsive user interfaces.
+- **Tailwind CSS**: A CSS framework that allows for rapid styling of the app using utility classes without writing custom CSS.
+- **TypeScript**: An extension of JavaScript that adds static types, helping to prevent errors and improve code quality.
+
+### Back-end:
+
+- **Python**: Used to build our server-side logic
+- **Flask**: A Python web framework, reknown for it's simplicity and flexibility in building web applications.
+- **SQLAlchemy**: An ORM (Object Relational Mapper) for Python, making it easier to handle database operations.
+- **Flask-Marshmallow**: Used for object serialization and deserialization, simplifying the conversion of complex data types to and from Python objects and formats like JSON.
+- **PostgreSQL**: Our chosen database system.
+- **Psycopg2**: A PostgreSQL adapter for Python, facilitating efficient and secure database connections.
+- **Flask-Bcrypt**: Provides hashing utilities for securing passwords.
+- **PyJWT**: A Python library for encoding and decoding JSON Web Tokens (JWT), facilitating secure user authentication.
+
+### Testing and Tools:
+
+- **pytest**: A framework that makes it easy to write simple and scalable test cases for the application's backend.
+- **Git**: Our version control system, essential for collaborative development.
+- **TablePlus**: A database management tool that provides a clean and simple interface to interact with multiple databases.
+
+This stack ensures that our application is efficient, maintainable, and scalable, providing a great experience for developers and users alike.
+
 ## Design and Planning
+
+Unsung Women was developed within a sprint of 6 days.
+The first day was dedicated to the wireframing,
 
 ## Project Status / Future Enhancements
