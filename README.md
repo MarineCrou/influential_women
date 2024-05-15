@@ -261,6 +261,10 @@ def get_single_woman_with_latest_update(woman_id):
     }, HTTPStatus.OK
 ```
 
+This was one of the highlights of this section, when a new profile or edited profile was featured in both the women's and contribution's tables. What a rush (as you can see by the information added to the database :)
+
+![victory!](./src/media/Readme/TablePlus-adding%20a%20new%20woman's%20profile.png)
+
 #### middleware, contrbutors, admin
 
 This step was essential to assign the correct permissions and access levels to each user or visitor.
@@ -319,6 +323,11 @@ And then applying the correct middleware to each route function.
 
 #### Seeding
 
-The l
+Before moving onto the front-end, it was crucial to test the database by seeding it with some initial data according to the models' format. This process was done simultaneously while building the different routes. It's goal was to ensure that the seeded data, as well as the GET, PUT, and POST requests for profiles and users, were functioning correctly.
+
+Tools like `Insomnia` were used as the "client" to test API endpoints while waiting for the front-end to be ready. `TablePlus` was used to visually inspect the data present in the database, ensuring that the seeding process was successful.
+
+Using these tools and methods ensured that the database was populated correctly and that all CRUD operations worked as expected.
+![seeding data code](./src/media/Readme/seeding.png)
 
 ## Project Status / Future Enhancements
