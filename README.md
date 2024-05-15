@@ -263,10 +263,59 @@ def get_single_woman_with_latest_update(woman_id):
 
 #### middleware, contrbutors, admin
 
-This step was essential to give the right permissions and accesses to the right people.
-I
+This step was essential to assign the correct permissions and access levels to each user or visitor.
 
-I opted for 2 middlewares, to simplyfy the process. One for the users who signed up (giving them the possibility of becoming contributors), one for the admin, who'd be the content moderator.
+I opted for two middlewares to simplify the process:
+
+- One for users who signed up, allowing them to become contributors.
+- One for the admin(s), who would act as the content moderator(s).
+
+I used JSON Web Tokens (JWT) and password hashing (bcrypt) in the user model to secure and define the payload. The serializer was instrumental in specifying which information to load (load_instance, load_only). The middleware checked the current user for a token and its payload, verifying identity and permissions.
+
+Using args and kwargs, I could run each route function through the chosen middleware.
+
+Contributor middleware:
+
+```
+def secure_route_contributor(route_func): #as long as they have a token, they are a valid user
+
+    @wraps(route_func)
+    def wrapper(*args, **kwargs):
+
+        raw_token = request.headers.get('Authorization') # check if token exists
+        print(raw_token) # Should print the token
+
+        if not raw_token: #if no token, return an unauthorized message
+            print("missing token 😢😢😢😢😢")
+            return { "message" : "Unauthorized"}, HTTPStatus.UNAUTHORIZED
+
+        token = raw_token.replace('Bearer ', '') # Delete the bearer word in front of the token
+        print(token)
+
+        try:
+            payload = jwt.decode(token, SECRET, "HS256")
+            print('token is valid 🎉🎉🎉🎉', payload)
+
+            #getting the user :
+            user_id = payload['sub'] # If we want to have a user later to do things like check permissions, we should get the user from the token.
+            user = db.session.query(UserModel).get(user_id) # Get the user with this ID
+            g.current_user = user  # Attach this user to the request, so we can use it later.
+            return route_func(*args, **kwargs)
+
+        except jwt.ExpiredSignatureError:
+            print("Expired")
+            return {"message": "Token has expired"}, HTTPStatus.UNAUTHORIZED
+        except Exception:
+            print("Issue with token - From secure_route_contributor")
+            return {"message": "Unauthorized 🎉"}, HTTPStatus.UNAUTHORIZED
+
+
+    return wrapper
+```
+
+And then applying the correct middleware to each route function.
+
+![middleware example](./src//media//Readme/middleware.png)
 
 #### Seeding
 
