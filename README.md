@@ -170,7 +170,106 @@ This stack ensures that our application is efficient, maintainable, and scalable
 
 ## Design and Planning
 
-Unsung Women was developed within a sprint of 6 days.
-The first day was dedicated to the wireframing,
+Unsung Women was developed within a 6-day sprint.
+
+### Wireframing, Designing, and Data Warehousing
+
+The first day was dedicated to wireframing, defining the MVP and stretch goals, and assessing the project's viability in such a short period of time. Using Notion, I broke down the tasks for both the front-end and back-end in a sprint-like manner.
+
+![notion task management](./src/media/Readme/notion-tasks-follow-2.png)
+
+After considerable research to find the desired design, I decided to base the website's aesthetic on the **New York Times 100 Most Influential People of 2024**. I was inspired by its sleek yet vibrant design and the introductory video capturing key moments of the featured individuals. The design is powerful, clean, and minimalist. I aimed for a blend between Wikipedia and the New York Times' website.
+
+**Defining the front-end design, the contributor's and admin's login pages!**  
+![Wireframe design of the webpage](./src/media/Readme/wireframe-front-end.png)  
+![Seller View WireFrame](./src/media/Readme/wireframe-front-end-logins-2.png)
+
+The most challenging aspect was defining the backend Python models (Data Warehousing) to enable users to become contributors, allowing them to add influential women and edit existing profiles. The complexity lay in nesting a model (user_contributions model) within the women_profile model. All a profile's information would come from the user model, attached to a woman's profile. This created a one-to-many relationship.
+
+**Defining the backend "Data Warehouse", using:**  
+![data warehouse](./src/media/Readme/back-end-model-definition.png)
+
+I also needed to decide on the number of roles that would exist, incorporating an admin to moderate the content.
+
+### Backend programming (Python, Flask, Postgresql, marshmallow, SQLAlchemy)
+
+he next 4 days were dedicated to setting up the backend. I divided the work into two main sprints:
+
+#### models, serializers and controllers
+
+First, I set up the routes in the app, creating a to-do list of the different data sources needed on the frontend. These included routes to:
+
+- Get all existing contributions
+- Generate a random profile each time the home page is loaded
+- Get, create, update, and delete profiles (GET, POST, PUT, DELETE)
+
+Most of my time was spent understanding how to handle nested models in HTML forms, which was new to me. I started by creating relationships between the models as outlined in the wireframing. Using back_populates, I established one-to-many relationships between the tables:
+
+- Users table, where each user's role was defined (contributor or admin)
+- Women profile table
+- Contribution table
+
+The challenge was to avoid creating an infinite loop when connecting the models.
+Specifically, I had to include a Woman's profile ID in the contributions model to ensure consistency between the profile created and the name in the women profile model and the contributions table. Additionally, each woman's profile needed an associated user both in the women table and the contributions table to track changes and maintain a history of edits.
+
+![contributions table relationship](./src/media/Readme/TablePlus-contributions-relationship.png)
+
+The biggest challenge in this phase was learning how to `GET`, as well as PUT and POST information (using a JSON object) to both the parent and nested models simultaneously. Previously, I had only dealt with single models without nested fields. The Flask and SQLAlchemy documentation proved invaluable. Serializers were essential in this phase, allowing Marshmallow to include contributions within each woman's profile:
+
+```
+class WomenSerializer(march.SQLAlchemyAutoSchema):
+    contributions = fields.Nested(ContributionsSerializer, many=True)
+```
+
+One of my most useful discoveries was using `db.Enum` to limit the possible values for each field. For example, I used it to define the status of requests made by contributors:
+
+```
+status = db.Column(
+          db.Enum('Pending Review', 'Approved', 'Rejected', name='status_types'),
+          default='Pending Review',
+          nullable=False ) # "Pending Review", "Accepted", "Rejected"
+```
+
+![contributions table relationship](./src/media/Readme/db.Enum-example.png)
+
+This approach was particularly helpful when retrieving only the approved contributions for each profile:
+
+```
+# 3. Get 1 profile with latest APPROVED contribution => to display on front-end latest approved changes for that profile
+
+@router_women.route("/women/<int:woman_id>", methods=['GET'])
+def get_single_woman_with_latest_update(woman_id):
+    woman_profile = db.session.query(WomenProfileModel).get(woman_id)
+    if not woman_profile:
+        return {"message": "No woman profile found"}, HTTPStatus.NOT_FOUND
+
+    latest_contribution = ContributionModel.query.filter(
+        ContributionModel.woman_id == woman_id,
+        ContributionModel.status == "Approved"
+    ).order_by(ContributionModel.reviewed_at.desc()).first()
+
+    if not latest_contribution:
+        return {
+            "woman": women_serializer.dump(woman_profile),
+            "latest_contribution": None,
+            "message": "No approved contributions found"
+        }, HTTPStatus.OK
+
+    return {
+        'woman': women_serializer.dump(woman_profile),
+        'latest_contribution': contributions_serializer.dump(latest_contribution)
+    }, HTTPStatus.OK
+```
+
+#### middleware, contrbutors, admin
+
+This step was essential to give the right permissions and accesses to the right people.
+I
+
+I opted for 2 middlewares, to simplyfy the process. One for the users who signed up (giving them the possibility of becoming contributors), one for the admin, who'd be the content moderator.
+
+#### Seeding
+
+The l
 
 ## Project Status / Future Enhancements
